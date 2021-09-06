@@ -12,7 +12,7 @@ PROJECT_ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.p
 SECRET_KEY = 't1sr%9q@&kjijcq^-p*#a$9&c2fj$fl57je4p#_c!xb+jm(%n$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','cmpe133system.herokuapp.com']
 
