@@ -3,6 +3,7 @@ import sys
 import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -129,14 +130,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 #remember the link of media is different on databasbe and html, so html need to + "/media" on src of img
-MEDIA_ROOT = os.path.join(BASE_DIR, './media/')
-MEDIA_URL = '/media/'
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static', 'images')
-# STATICFILES_DIRS = (os.path.join(os.path.dirname(BASE_DIR), 'static', 'asserts'),)
-STATICFILES_DIRS =[os.path.join(BASE_DIR,'static')]
-# STATIC_MEDIA = '/media/'
+if DEBUG:
+    MEDIA_URL = '/media/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    MEDIA_ROOT = os.path.join(PROJECT_ROOT_PATH, 'media/')
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-SITE_ID = 1
-django_heroku.settings(locals())
+    PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))
+    STATICFILES_DIRS = (
+        os.path.join(PROJECT_DIR, 'static').replace('\\','/'),
+    )
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    MEDIA_ROOT = os.path.join(PROJECT_ROOT_PATH, 'media/')
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.0/howto/static-files/
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
