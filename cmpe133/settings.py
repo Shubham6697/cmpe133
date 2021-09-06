@@ -13,7 +13,7 @@ SECRET_KEY = 't1sr%9q@&kjijcq^-p*#a$9&c2fj$fl57je4p#_c!xb+jm(%n$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','cmpe133system.herokuapp.com']
 
 # Application definition
 
