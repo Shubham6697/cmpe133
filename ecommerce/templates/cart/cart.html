@@ -1,0 +1,66 @@
+{% extends 'html/nav.html' %} {% block content %} {% load static %}
+<head>
+    <link rel="stylesheet" href="{% static "assests/cart.css" %}">
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+    {% if empty == False %}
+            {% comment %} If the cart has items {% endcomment %}
+        <div class="column-1">
+            <table class="table">
+            <thead class="table-head">
+                <tr>
+                <th scope="col"></th>
+                <th scope="col">Item</th>
+                <th scope="col">₹ Price</th>
+                <th scope="col">Qty</th>
+                <th></th>
+            
+                <th scope="col">₹ Item</th>
+                <th>Total Count: {{ cart.totalCount }} </th>
+                <th></th>
+               
+            </thead>
+            <tbody class="table-body">
+            {% for item in cart.cartitem_set.all %}
+            <tr class="table-bd-content">  
+                <td >
+                    <img style="width:100px; height:100px; margin: 0 auto; border: none; " src="media/{{ MEDIA_URL }}{{ item.imageName}}" />
+                </td>
+                <td><b>{{ item.product.title }}</b></td>
+                <td>{{ item.product.salePrice }}</td>
+                {% comment %} the input  of the number of items {% endcomment %}
+                <td>
+                    <form action="{% url "delete_cart" item.product.slug %}" method='POST'>
+                    {% csrf_token %}
+                        <input  id="remove-btn" name='delete' type="number" value="{{ item.quantity }}"/>
+                
+                <button type='submit'  id="button-submit" ><span class="material-icons">done</span></button>
+                    </form>
+                </td>
+                <td><a href='{% url "delete_cart" item.product.slug %}?qty=0'><span class="material-icons material-icons-delete">delete</span></a></td>
+                <td id="productTotal">{{item.productTotal}}</td>
+            {% endfor %}
+        </tbody>
+        </table>
+        </div>
+        
+        <h1 class="tfoot-table">Total : {{ cart.total }}</h1>
+        <button class="button-checkout"><a  class="checkout" href="{% url "checkout" %}"><span class="material-icons" >shopping_cart</span>Payment</a></button>
+        <button class="button-checkout"><a href="{% url "success" %}"><span class="material-icons" >shopping_cart</span>Cash On Delivery</a></button>    
+    </div>
+    {% else %} 
+    {% comment %}  If the cart is none item {% endcomment %}
+    <div class="empty">
+        <span id="message-empty"><h1 class="text-center">{{ message_empty }}</h1></span>
+        <span class="navbar-part-group badge "><a href="{% url 'homeMain' %}" >Shopping?<span class="material-icons">home</span></a></span>
+    </div>
+
+
+    {% endif %} 
+</div>
+</body>
+{% include 'html/footer.html' %}
+{% endblock content %}

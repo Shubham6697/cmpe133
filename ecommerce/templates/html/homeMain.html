@@ -1,0 +1,69 @@
+
+{% extends "html/nav.html" %} {% load static %} {% block content %}
+{# It is for home page to show display of products. It contains images, description, title #}
+<img src="media/poster.png" alt="Poster" style='height: 100%; width: 100%; object-fit: contain'>
+<br> <br>
+<head>
+<link rel="stylesheet" href="{% static 'assests/homeMain.css' %}">
+
+</head>
+<body >
+<div class="container">
+    <div class="row ">
+        <div class="col-lg-3">
+            <div class="list-group">
+                {% comment %} category {% endcomment %}
+                <form  action='/category/'>
+                    <br></br>
+                    <button style="background-color:DarkRed;" class="list-group-item list-group-item-action active">Category</button> 
+                    <button type='submit' name='category' value="Foods" class="list-group-item list-group-item-action">Foods<i class="arrow-right"></i></button>
+                    <button type='submit' name='category' value="Fruits" class="list-group-item list-group-item-action" >Fruits<i class="arrow-right"></i></button>
+                    <button type='submit' name='category' value="Baby Care" class="list-group-item list-group-item-action" >Baby Care<i class="arrow-right"></i></button>
+                    <button type='submit' name='category' value="Home & Cleaning" class="list-group-item list-group-item-action" >Home & Cleaning<i class="arrow-right"></i></button>
+                    <button type='submit' name='category' value="Sports & Nutrition" class="list-group-item list-group-item-action" >Sports & Nutrition<i class="arrow-right"></i></button>
+                    <button type='submit' name='category' value="Pet Care" class="list-group-item list-group-item-action" >Pet Care<i class="arrow-right"></i></button>
+                    
+                    <button type='submit' name='category' value="Others" class="list-group-item list-group-item-action" >Others<i class="arrow-right"></i></button>
+                </form> 
+            </div>
+
+        </div>
+        <div class="col-lg-9">
+            <div class="row">
+                {% for product in product %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100" >
+                        {% if product.productimage_set.all %}
+                            {% for item in product.productimage_set.all %}
+                                {% if item.featured %}
+                            {# to print the image#}
+                                <img style="width:200px; height:200px; margin: 0 auto;" src="media/{{ MEDIA_URL }}{{ item.image }}" class="card-img-top" />
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        <div class="card-body">
+                               {#  to print the title, price and description. "truncatewords: #" : is to print the numbers of words in description #}
+                            <a href='{{ product.get_absolute_url }}'><h4>{{ product.title }}</h4></a>
+                            <p class="card-text"> {{product.description|truncatewords:10}} </p>
+                            <p>
+                                {#  The link of a unique product. "get_absolute_url" is a function in models.py #}
+                                <a href="{{ product.get_absolute_url }}" class="btn btn-primary" role="button">View</a>
+                                <a href="" class="btn btn-default" role="button"></a>
+                            </p>Price: <b>₹ {{ product.salePrice }}</b>
+                        </div>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+{% include 'html/footer.html' %}
+{% endblock content %}
+
+

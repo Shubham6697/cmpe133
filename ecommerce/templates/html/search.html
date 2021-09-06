@@ -1,0 +1,51 @@
+{% extends "html/nav.html" %} {% load static %}{% block content %}
+<body style="max-width: 100%;">
+  <h1 class="text-center">Results: {{ query }}</h1>
+  {% if product %}
+  <table class="table">
+    <thead>
+      <th></th>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Add</th>
+    </thead>
+
+    {% for product in product %}
+    <tr>
+      <td style="width: 200px; height: 200px;">
+        {% if product.productimage_set.all %} 
+          {% for item in product.productimage_set.all %} 
+            {% if item.featured %}
+              <img style=" width: 100%; height: 100%; background-repeat: no-repeat; background-size: cover; background-position: center; margin: 0 auto;" src="/media/{{item.image}}" class="card-img-top"/>
+        {% endif %} {% endfor %} 
+        {% comment %} 
+        {% else %}
+        <div
+          style="
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            margin: 0 auto;"></div>
+        {% endcomment %}
+        {% endif %}
+      </td>
+      <td><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></td>
+      <td>{{ product.salePrice }}</td>
+      <td>
+        {% if not user.is_authenticated %}
+        <span><a href='{% url "signin" %}'>Sign In to Add</a></span>
+        {%else%}
+        <span><a href='{% url "update_cart" product.slug %}?qty=1'>Add To Cart</a></span>
+        {% endif %} {% comment %}
+        <a href='{% url "update_cart" product.slug %}?qty=1'>Add To Cart</a> {% endcomment %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <h2 class="text-center">Invalid Products. Try again!!!</h2>
+  {% endif %}
+</body>
+{% endblock content %}

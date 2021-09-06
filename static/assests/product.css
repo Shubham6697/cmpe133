@@ -1,0 +1,43 @@
+
+
+.add-btn {
+    padding: 13px 20px;
+    background-color: #8B0000;
+    border-radius: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 14px; }
+
+.add-btn:hover {
+    border: 1px solid #8B0000;
+    background-color: #fff;
+    color: #fdbb28; }
+
+.button2 {width: 250px;}
+
+.arrow-right{
+    border: solid black;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    float: right;
+}
+
+.button3 a{
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #1E90FF;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+.button3:hover {
+    opacity: 0.7;
+}

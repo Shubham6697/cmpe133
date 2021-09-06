@@ -1,0 +1,218 @@
+
+  *{
+    padding: 0; 
+    margin: 0; 
+
+}
+  /* Desktops and laptops ----------- */
+@media only screen 
+and (min-width :975px) {
+  *{
+      padding: 0; 
+      margin: 0; 
+  }
+  .container{
+    display: flex; 
+    flex-flow: column wrap;
+    position: relative;
+    justify-content: center;
+  }
+  .column-1{
+    flex: 0 0 2;
+  }
+  .comlumn-2{
+   flex: 0 0 1;
+  }
+  .row1-left{
+      height:230px;
+      width:550px;
+      border: none;
+      box-shadow: 2px 2px 2px 2px grey;
+      box-sizing: border-box;
+      padding: 15px 15px 15px 20px;
+      margin: 50px 30px; 
+    }
+    .row2-left{
+      height:100px;
+      width: 550px;
+      border: none;
+      box-shadow: 2px 2px 2px 2px grey;
+      box-sizing: border-box;
+      padding: 5px;
+      text-align: center;
+      margin: 50px  -15px; 
+      float: right;
+    }
+
+    .row3-left{
+      margin:5% -4px;
+      box-shadow: 2px 2px 2px 2px grey;
+      height:120px;
+      width: 550px;
+      padding: 20px; 
+
+    }
+    .row3-left input[type="radio"] {
+      opacity: 0;
+      position: fixed;
+      width: 0;
+    }
+    .row3-left label {
+      font-size:  20px;
+  }
+  .row3-left input[type="radio"]:checked + label {
+    box-shadow: 0px 2px 3px 0px black;
+    background-color: black;
+    color: white;
+  }
+  .row3-left label:hover, label:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em black;
+    transform: translateY(-0.25em);
+  }
+  .button{
+    border: none;
+    background-color: transparent;
+    border-radius: 2px;
+    font-size: 19px;
+    outline: none;
+    background-color: cornsilk;
+  }
+  .button:hover{
+    box-shadow: 0 0.5em 0.5em -0.4em black;
+    transform: translateY(-0.25em);
+  }
+  .button:focus {outline:0;}
+
+.radio-toolbar input[type="radio"]:focus + label {
+  border: 2px dashed #444;
+}
+    .row1-right{
+      position: relative;
+      height:120px;
+      width:550px;
+      box-shadow: 2px 2px 2px 2px grey;
+      padding: 20px; 
+      text-align: center;
+      margin: 50px -80em -10em 0.5em; /* up-down, right */
+      justify-content: center;
+    }
+    
+    #paypal-button-container{
+      height:200px;
+      width:450px;
+      text-align: center;
+      position: relative;
+      left: 50px;
+      bottom: 20px;
+    }
+    .row2-right{
+      position: relative;
+      height:350px;
+      width:550px;
+      box-shadow: 2px 2px 2px 2px grey;
+      padding: 20px auto; 
+      margin:35px -17px; /* up-down, right */
+    }
+    #row1-sm-right table,  td {
+      border-style: hidden;
+    }
+  
+    #text-h1 h1{ 
+      justify-content: center;
+    }
+    .text-item{
+      text-align: center;
+      padding: 10px 20px;
+    }
+
+    
+}
+@media only screen 
+and (max-width :975px) and (min-width: 400px){
+    *{
+        padding: 0; 
+        margin: 0;
+        flex-direction: column ;
+        justify-content: center;
+    }
+    .container{
+      display: flex;  
+      justify-content: center;
+      flex-direction: column ;
+    }
+    
+    .row1-left{
+      padding: 20px 30px 50px ;
+      box-shadow: gray 2px 2px 2px 2px;
+    }
+    
+    
+    .row2-left{
+      box-shadow: gray 2px 2px 2px 2px;
+      padding: 20px 20px;
+      text-align: center;
+    
+    }
+    #paypal-button-container:before{
+      height:200px;
+      width:300px;
+      text-align: center;
+      position: relative;
+      left: 150px;
+      justify-content: center;
+    }
+
+    #paypal-button-container:after{
+      height:200px;
+      width:300px;
+      text-align: center;
+      position: relative;
+      left: 100px;
+      justify-content: center;
+      
+    }
+    .text-item{
+      text-align: center;
+    }
+    .bill{
+      text-align: center;
+      padding: 20px; 
+
+    }
+    .row3-left input[type="radio"] {
+      opacity: 0;
+      position: fixed;
+      width: 0;
+    }
+    .row3-left label {
+      font-size:  20px;
+  }
+  .row3-left input[type="radio"]:checked + label {
+    box-shadow: 0px 2px 3px 0px black;
+    background-color: black;
+    color: white;
+  }
+  .row3-left label:hover, label:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em black;
+    transform: translateY(-0.25em);
+  }
+  button{
+    border: none;
+    background-color: transparent;
+    border-radius: 2px;
+    font-size: 19px;
+    outline: none;
+    background-color: cornsilk;
+  }
+  .button:hover{
+    box-shadow: 0 0.5em 0.5em -0.4em black;
+    transform: translateY(-0.25em);
+  }
+  .button:focus {outline:0;}
+    .row1-right{
+      padding: 50px 50px;
+      box-shadow: 2px 2px 2px 2px grey;
+      position: relative;
+     } 
+}
+

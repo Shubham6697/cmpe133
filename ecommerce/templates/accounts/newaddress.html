@@ -1,0 +1,171 @@
+{% extends 'html/nav.html' %} {% block content %}
+<body style="overflow-x:hidden">
+        {% if user.is_authenticated %} 
+        
+        
+        <div class="card" style="width: 50rem;">
+                <div class="card-header" style="text-align: center;font-size: 3rem;">
+                  <b>Profile</b>
+                </div>
+
+        <!--<h3 class="text-center">Profile</h3> -->
+
+        <div>
+                <div class="panel-group">
+                                <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                                <a data-toggle="collapse" href="#collapse1">
+                                                <h3 class="text-center">User Information</h3></a>
+
+
+                        <div id="collapse1" class="panel-collapse collapse " >
+                                <ul style="align-items: center;">
+                                        <li class="list-group-item">
+                                                <form action="{%  url "profile" %}" method="POST" class="list-group" >
+                                                                                {% csrf_token %}
+                                                                                <span><h4>Username</h4><input class="form-control text-center" type="text" name="username" value="{{ user.username}}" placeholder="username" ></span>
+                                                                                <span><h4>First Name</h4><input class="form-control text-center" type="text" name="first_name" value="{{ user.first_name}}" placeholder="first name"  ></span>
+                                                                                <span><h4>Last Name</h4><input class="form-control text-center" type="text" name="last_name" value="{{ user.last_name}}" placeholder="last name"  ></span>
+                                                                                <br>
+                                                                                <span style="align-items: center;"><input class="form-control text-center" type="submit" class="btn btn-default" value='Save'  ></span>
+                                                </form>
+                                        </li>
+                                </ul>
+                        </div>
+                </div>
+        </div>
+        <div>
+                <div class="panel-group">
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#collapse2">
+                                                <h3 class="text-center">Address</h3></a>
+
+                        <div id="collapse2" class="panel-collapse collapse">
+                                <ul>
+                                        <li class="list-group-item">
+        
+                                                <form action="{%  url "add_address" %}" method="POST">
+                                                                {% csrf_token %}
+                                                        {% comment %} <span><h4>Address</h4><input class="form-control text-center" name='address' placeholder='Your address' value='{{address.shipping.address}}' type="text" required></span> {% endcomment %}
+                                                        <span><h4>Address</h4><input class="form-control text-center" name='address' placeholder='Your address' value='{{ address.address }}' type='text' required></span>
+                                                        <span><h4>City</h4><input class="form-control text-center" name='city' placeholder='Your City' value='{{ address.city }}' type="text" required></span>
+                                                        <span><h4>State</h4>
+                                                        <select style=" text-align: center; text-align-last: center;" class="form-control text-center" id="sel"  name="state" >
+                                                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                                                <option value="Assam">Assam</option>
+                                                                <option value="Bihar">Bihar</option>
+                                                                <option value="Chandigarh">Chandigarh</option>
+                                                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                                                <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                                                <option value="Daman and Diu">Daman and Diu</option>
+                                                                <option value="Delhi">Delhi</option>
+                                                                <option value="Lakshadweep">Lakshadweep</option>
+                                                                <option value="Puducherry">Puducherry</option>
+                                                                <option value="Goa">Goa</option>
+                                                                <option value="Gujarat">Gujarat</option>
+                                                                <option value="Haryana">Haryana</option>
+                                                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                                                <option value="Jharkhand">Jharkhand</option>
+                                                                <option value="Karnataka">Karnataka</option>
+                                                                <option value="Kerala">Kerala</option>
+                                                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                                                <option value="Maharashtra">Maharashtra</option>
+                                                                <option value="Manipur">Manipur</option>
+                                                                <option value="Meghalaya">Meghalaya</option>
+                                                                <option value="Mizoram">Mizoram</option>
+                                                                <option value="Nagaland">Nagaland</option>
+                                                                <option value="Odisha">Odisha</option>
+                                                                <option value="Punjab">Punjab</option>
+                                                                <option value="Rajasthan">Rajasthan</option>
+                                                                <option value="Sikkim">Sikkim</option>
+                                                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                                                <option value="Telangana">Telangana</option>
+                                                                <option value="Tripura">Tripura</option>
+                                                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                                                <option value="Uttarakhand">Uttarakhand</option>
+                                                                <option value="West Bengal">West Bengal</option>
+                                                        </select>	
+                                                        </span>
+                                                        <span><h4>Zipcode</h4><input  class="form-control text-center" name="zipcode" type="text" inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$" placeholder="Your ZipCode" value='{{ address.zipcode }}' required></span>
+                                                        <span><h4>Phone Number</h4><input  class="form-control text-center" type="tel" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="999-999-9999" value='{{ address.phone_number }}'></span>
+                                                        {% comment %} <span><h4>Default Addresss</h4><input  name="billing" type="checkbox" checked ></span> {% endcomment %}
+                                                        <br>
+                                                        <span><input  class="form-control text-center" type="submit" class="btn btn-default" value='Save'></span>
+                                                </form>
+                                                
+                                </ul>     
+                        </div>
+                </div>
+        </div>
+
+        <div>
+                <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#collapse3">
+                                            <h3 class="text-center">Contact</h3></a>
+
+
+                        <div id="collapse3" class="panel-collapse collapse">
+                                <ul>
+                                        <li class="list-group-item">
+                                                <form method="POST" action="{%  url "contact" %}">
+                                                        {% csrf_token %}
+                                                        <span><h4>First Name</h4><input name='firstName' type="text" value="{{ user.first_name}}" placeholder="Your First Name" class="form-control text-center"  valuerequired></span>
+                                                        <span><h4>Last Name</h4><input name='lastName' type="text" value="{{ user.last_name}}" placeholder="Your Last Name" class="form-control text-center" required></span>
+                                                        <span><h4>Email</h4><input type="text"  name='email' placeholder="Your Email" value="{{user.email}}" class="form-control text-center" required></span>
+                                                        <span><h4>Message</h4><textarea name="message" cols="30" placeholder="Describe your issue here..."  class="form-control text-center" required></textarea></span>
+                                                        <br>
+                                                        <span><input  class="form-control text-center" type="submit" class="btn btn-default" value='Send'></span>
+                                                </form>
+                                        </li>
+                                </ul>
+                        </div>
+                </div>
+        
+        </div>
+        <div>
+                <a  href="{% url 'logout' %}"><h3 class="text-center">Logout</h3></a>
+        </div>
+         <div>
+                <a  href="{% url 'about' %} "><h3 class="text-center">About</h3></a>
+        </div>
+                                        
+
+        
+{% else %}
+        <h3 class="text-center">Contact</h3>
+        <div>
+                <form method="POST" action="{%  url "contact" %}">
+                        {% csrf_token %}
+                        <span><h4>First Name</h4><input name='firstName' type="text" placeholder="Your First Name"  class="form-control text-center" required></span>
+                        <span><h4>Last Name</h4><input name='lastName' type="text" placeholder="Your Last Name"  class="form-control text-center" required></span>
+                        <span><h4>Email</h4><input type="text"  name='email' placeholder="Your Email" class="form-control text-center"  required></span>
+                        <span><h4>Message</h4><textarea name="message"  cols="30" placeholder="Describe your issue here..." class="form-control text-center" required></textarea></span>
+                        <br>
+                        <span><input  class="form-control text-center" type="submit" class="btn btn-default" value='Send'></span>
+                </form>
+        </div>
+
+{% endif %}
+
+<script>
+        var obj = document.getElementById("sel");
+        for(i=0; i<obj.options.length; i++){
+        if(obj.options[i].value == '{{address.state}}' ){
+                obj.selectedIndex = i;
+        }
+        }
+</script>
+</body>
+
+
+{% endblock content %}
+

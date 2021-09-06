@@ -1,0 +1,231 @@
+{% extends "html/nav.html" %} {% load static %} {% block content %}
+{# It is to custom an individual product  #}
+<head>
+    <link rel="stylesheet" href="{% static 'assests/product.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+</head> 
+<body style=" max-width: 100%;">
+  <div class="container">
+  <div class="row">
+    <!--categrory-->
+    <div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
+      <div class="list-group button2">
+          {% comment %} category {% endcomment %}
+          <form  action='/category/' >
+            <button style="background-color:DarkRed;" class="list-group-item list-group-item-action active">Category</button> 
+            <button type='submit' name='category' value="Foods" class="list-group-item list-group-item-action">Foods<i class="arrow-right"></i></button>
+            <button type='submit' name='category' value="Fruits" class="list-group-item list-group-item-action" >Fruits<i class="arrow-right"></i></button>
+            <button type='submit' name='category' value="Baby Care" class="list-group-item list-group-item-action" >Baby Care<i class="arrow-right"></i></button>
+            <button type='submit' name='category' value="Home & Cleaning" class="list-group-item list-group-item-action" >Home & Cleaning<i class="arrow-right"></i></button>
+            <button type='submit' name='category' value="Sports & Nutrition" class="list-group-item list-group-item-action" >Sports & Nutrition<i class="arrow-right"></i></button>
+            <button type='submit' name='category' value="Pet Care" class="list-group-item list-group-item-action" >Pet Care<i class="arrow-right"></i></button>
+                    
+            <button type='submit' name='category' value="Drinks" class="list-group-item list-group-item-action" >Drinks<i class="arrow-right"></i></button>
+            <button type='submit' name='category' value="Others" class="list-group-item list-group-item-action" >Others<i class="arrow-right"></i></button>
+          </form> 
+      </div>
+    </div>
+    <!-- end category-->
+    <section class="text-center col-lg-9 col-12">
+      <h3 class="font-weight-bold mb-5">Product Details</h3>
+      <div class="row">
+        <!--picture-->
+        <div class="col-lg-6 col-12">
+          {% for img in images %}
+          
+          <!--so far, we just have 1 image for product, in future we will add side images-->
+          <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel">
+            {% if img.featured %}
+            <!--slides-->
+            <div class="carousel-inner text-center text-md-left" role="listbox">
+              <div class="carousel-item active">
+                <img src='media/{{ MEDIA_URL }}{{ img.image }}'
+                  alt="First slide" class="img-fluid">
+              </div>
+            </div>
+            {% endif %}
+            <!-- end slides-->
+            <!--Thumbnails-->
+            <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+            <!--end Thumbnails-->
+          </div>
+          {% endfor %}
+        </div>
+        <!--end picture-->
+
+        <!--text and price and button-->
+        <div class="col-lg-6 col-12 text-center text-md-left">
+          <h2 class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">
+            <strong>{{product.title}}</strong>
+          </h2>
+
+          <!--price-->
+          <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
+            <span class="black-text font-weight-bold">
+              <strong>₹ {{product.salePrice}}</strong>
+            </span>
+          </h3>
+          <!--end price-->
+
+          <!-- Add to Cart -->
+          <section >
+            <div class="mt-5">
+              
+              <div class="row text-center text-md-left">
+
+
+              <div class="row mt-3">
+                <div class="col-md-12 text-center text-md-left text-md-right">
+                  <div class="button3">
+                    {% if not user.is_authenticated %} 
+                    <span><a href='{% url "signin" %}'>Sign In to Add</a></span>
+                    {%else%}
+                    <span><a href='{% url "update_cart" product.slug %}?qty=1'>Add To Cart</a></span>
+                    {%endif%}
+                  </div> 
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- /.Add to Cart -->
+          <br>
+
+          <!--accordion card-->
+          <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+            
+            <!--card1-->
+            <div class='card'>
+              <div class="card-header" role="tab" id="headingOne1">
+                <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                  aria-controls="collapseOne1">
+                  <h5 class="mb-0">
+                    Description
+                    <i class="fas fa-angle-down rotate-icon"></i>
+                  </h5>
+                </a>
+              </div>
+
+              <!-- Card body -->
+              <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+                data-parent="#accordionEx">
+                {% for img in images %}
+                {% if  not img.featured %}
+                <div class="card-body">
+                  <a href="#" class="thumbnail"><img src="media/{{ MEDIA_URL }}{{ img.image }}" class="card-img-top" />
+                  </a>
+                </div>
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+            <!--card2-->
+            <div class='card'>
+              <!-- Card header -->
+              <div class="card-header" role="tab" id="headingTwo2">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
+                  aria-expanded="false" aria-controls="collapseTwo2">
+                  <h5 class="mb-0">
+                    Details
+                    <i class="fas fa-angle-down rotate-icon"></i>
+                  </h5>
+                </a>
+              </div>
+
+              <!-- Card body -->
+              <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2"
+                data-parent="#accordionEx">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                  3 wolf moon officia aute,
+                  non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+                  moon
+                  tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                </div>
+              </div>
+            </div>
+            <!--card3-->
+            <div class='card'>
+              <!-- Card header -->
+              <div class="card-header" role="tab" id="headingThree3">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree3"
+                  aria-expanded="false" aria-controls="collapseThree3">
+                  <h5 class="mb-0">
+                    More
+                    <i class="fas fa-angle-down rotate-icon"></i>
+                  </h5>
+                </a>
+              </div>
+
+              <!-- Card body -->
+              <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3"
+                data-parent="#accordionEx">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                  3 wolf moon officia aute,
+                  non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+                  moon
+                  tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <!-- end accordion-->
+
+        </div>
+        <!-- end text and price and button-->
+      </div>
+    </section>
+  </div>
+  
+</div>
+</body>
+{% endblock content %}
+
+
+
+
+
+<!--{# It is to custom an individual product  #}
+<head>
+    <link rel="stylesheet" href="{% static 'assests/signin.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+</head> 
+<body>
+{% if not user.is_authenticated %} 
+    <a href='{% url "signin" %}'>Sign In to Add</a>
+    <h1>{{ product.title }}</h1>
+    {% for img in images %}
+        {% if img.featured %}
+        <div class="col-xs-12 col-md-6">
+            <img src='media/{{ MEDIA_URL }}{{ img.image }}' class="rounded mx-auto d-block" >
+        </div>     
+        {% elif  not img.featured %}
+        <div class="col-xs-6 col-md-3">
+        <a href="#" class="thumbnail"><img src="media/{{ MEDIA_URL }}{{ img.image }}" class="card-img-top" />
+    </a> </div>
+        {% endif %}
+    {% endfor %}
+{% else%}
+    <a href='{% url "update_cart" product.slug %}?qty=1'>Add To Cart</a>
+    <h1>{{ product.title }}</h1>
+    {% for img in images %}
+        {% if img.featured %}
+        <div class="col-xs-12 col-md-6">
+            <img src='media/{{ MEDIA_URL }}{{ img.image }}' class="rounded mx-auto d-block" >
+        </div>     
+        {% elif  not img.featured %}
+        <div class="col-xs-6 col-md-3">
+        <a href="#" class="thumbnail"><img src="media/{{ MEDIA_URL }}{{ img.image }}" class="card-img-top" />
+    </a> </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</body>-->

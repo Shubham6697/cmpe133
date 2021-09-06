@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+
+{# Please do not delete all contents in head #}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {#   Title #}
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Groceteria | a self-serve grocery shop </title>
+    {% endif %}
+    
+    <link rel="stylesheet" href="{% static 'assests/nav.css' %}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+  </head>
+  <body>
+  
+
+
+   
+
+
+
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'homeMain' %}"><img  id="brand" src="{% static 'images/branch_logo.png' %}"/></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon" style="border:none "></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                
+                  {% if not user.is_authenticated %} 
+                        <li class="navbar-part-group nav-link"><a href="{% url 'homeMain' %}" class="badge">Home<span class="material-icons">home</span></a></li>
+                        <li class="navbar-part-group nav-link"><a href="{% url 'register' %}" class="badge">Register<span class="material-icons">how_to_reg</span></a></li>
+                        <li class="navbar-part-group nav-link"><a href="{% url 'signin' %}" class="badge">Log in<span class="material-icons">lock_open</span></a></li>
+                        <li class="navbar-part-group nav-link"><a href="{% url 'contact' %}" class="badge"> Contact<span class="material-icons">contact_support</span></a></li>
+                        <li class="navbar-part-group nav-link"><a  href="{% url 'about' %} " class="badge">About<span class="material-icons">description</span></a></li>
+                        <li class="navbar-part-group nav-link">
+                                          <form class="search" action='/s/'> 
+                                                {% comment %} /s/ for searching {% endcomment %}
+                                                    <input  class='search-ip text-center' type="search" placeholder="Search" aria-label="search"  name='search'>{% comment %} name is to display the searching variable  {% endcomment %}
+                                                <button class='search-btn' type="submit"><span class="material-icons search-icon">search</span></button>
+                                            </form>
+
+                        {% else %}
+                        <li class="navbar-part-group1 nav-link"><a href="{% url 'homeMain' %}" class="badge"><span class="material-icons">home</span>Home</a></li>
+                       
+                        <li class="navbar-part-group1 nav-link"><a href="{% url 'cart' %}" class="badge" ><span class="material-icons">shopping_cart</span>  Cart {% if not request.session.key  %}0{% else %}{{ request.session.key}}{% endif %}</a></li>
+                        <li class="navbar-part-group1 nav-link"><a href="{% url 'add_address' %}" class="badge"><span class="material-icons">face</span>Profile</a></li>
+                         <li class="navbar-part-group1 nav-link">
+                                              <form class="search" action='/s/'> 
+                                                    {% comment %} /s/ for searching {% endcomment %}
+                                                        <input  class='search-ip text-center' type="search" placeholder="Search" aria-label="search"  name='search'>{% comment %} name is to display the searching variable  {% endcomment %}
+                                                    <button class='search-btn' type="submit"><span class="material-icons search-icon">search</span></button>
+                                                </form>
+                        </li>
+                        {% comment %} <li class="navbar-part-group1"><a href="{% url 'contact' %}"> Contact</a></li> {% endcomment %}
+                    {% endif %}
+                  
+              </ul>
+            </div>
+          </div>
+        </nav>
+        
+        
+    {#    Status of after actions. E.g: register: register sucessfully #} 
+
+
+
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{message}}</div>
+
+    {% endfor %} {% endif %} 
+    {% comment %} <div class="container">{% block jumbotron %}{% settendblock %}</div> {% endcomment %}
+
+    {# For the contents of other pages #}
+    <div class="container">{% block content %} {% endblock content %}</div>
+    
+
+{# Please Do not delete #}
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

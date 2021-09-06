@@ -1,0 +1,38 @@
+{% extends "html/nav.html" %}{% load static %} {% block content %}
+
+<head>
+  <link rel="stylesheet" href="{% static 'assests/signin.css' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+</head>
+
+<body style="overflow: auto;  max-width: 100%; ">
+  <main>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="login-wrapper my-auto">
+            <h1 class="login-title">Sign Up</h1>
+            <form action="register" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <input type="text" name="first_name" class="form-control" placeholder="First Name" required/><br />
+                <input type="text" name="last_name" class="form-control" placeholder="Last Name" required /><br />
+                <input type="text" name="username" class="form-control" placeholder="Username" minlength="5"  maxlength="10"required/><br />
+                <input type="email" name="email" class="form-control" placeholder="Email" required/><br />
+                <input type="password" name="password" class="form-control" placeholder="Password" minlength="8" required/><br />
+                <input type="password" name="password1" class="form-control" placeholder="Confirm Password"  minlength="8" required/><br />
+              </div>
+              <button type="submit" class="btn btn-block login-btn">Register</button>
+            </form>
+            <div><a href="{% url 'signin' %}">Sign In</a></div>
+          </div>
+        </div>
+        <div class="col-sm-6 px-0 d-none d-sm-block">
+          <img src="media/halfimage.jpg" alt="login image" class="login-img">
+        </div>
+      </div>
+    </div>
+  </main>
+  {% include 'html/footer.html' %}
+</body>
+{% endblock content %}

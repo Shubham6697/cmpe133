@@ -1,0 +1,81 @@
+{% extends "html/nav.html" %} {% load static %} {% block content %}
+
+<head>
+  <link rel="stylesheet" href="{% static 'assests/signin.css' %}" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Tangerine"
+  />
+</head>
+
+<body style="overflow: auto; max-width: 100%;">
+  
+
+  <main>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 login-section-wrapper">
+          <div class="login-wrapper my-auto">
+            <h1 class="login-title">Sign In</h1>
+            <form method="post" action="signin">
+              {% csrf_token %}
+              <div class="form-group">
+                <input
+                  name="username"
+                  class="form-control"
+                  placeholder="Username"
+                  class="signinForm"
+                  type="text"
+                />
+                <input
+                  name="password"
+                  class="form-control"
+                  placeholder="Password"
+                  type="password"
+                />
+              </div>
+              <button type="submit" class="btn btn-block login-btn">
+                Log In
+              </button>
+            </form>
+            <div class="login-wrapper-footer-text">
+              <span
+                ><a href="{% url 'register' %}" class="text-reset"
+                  >Register</a
+                ></span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 px-0 d-none d-sm-block">
+          <img src="media/halfimage.jpg" alt="login image" class="login-img" />
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {% include 'html/footer.html' %}
+</body>
+
+<!-- <body>
+  <div id="Sign_in">
+    <span>Sign in</span>
+  </div>
+  <form  method='post' action='signin'>
+    {% csrf_token %}
+  
+  
+    <div id="Username__">
+      <input name='username' placeholder='Username' class='signinForm' type="text" >
+    </div>
+    <div id="Passwords__" >
+      <input name='password' class='signinForm' placeholder='Password' type="password" >
+    </div>
+    <button type="submit">Signin</button>
+  </form>
+  <!-- <div id='__Register__'> 
+  <div>
+    <span><a href="{% url 'register' %}">Register</a></span>
+  </div>
+</body> -->
+{% endblock content %}
