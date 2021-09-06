@@ -117,7 +117,7 @@ LANGUAGE_CODE = 'en-us'
 '''To check the time zones you can go to python => import pytz => pytz.all_timezones => then copy the time zones you
  would like'''
 
-TIME_ZONE = 'America/Los_Angeles'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
